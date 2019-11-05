@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>My first three.js app</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="c"></canvas>
+  <script src="js/three.js"></script>
+  <script>
+    function main() {
+      const canvas = document.querySelector('#c');
+      const renderer = new THREE.WebGLRenderer({
+        canvas
+      });
+      // Our Javascript will go here.
+
+      // SET THE CAMERA POSITION
+      const fov = 40;
+      const aspect = 2; // the canvas default
+      const near = 0.1;
+      const far = 1000;
+      const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+      camera.position.set(0, 5, 10);
+      camera.up.set(0, 1, 0);
+      camera.lookAt(0, 0, 0);
+
+      const scene = new THREE.Scene();
+
+      {
+        const color = 0xFFFFFF;
+        const intensity = 3;
+        const light = new THREE.PointLight(color, intensity);
+        scene.add(light);
+      }
+
+      const objects = [];
+
+      // SUN
+      const rendererTest = new THREE.WebGLRenderer();
+      rendererTest.setSize(window.radius, window.widthSegments, window.heightSegments, window.phiStart, window.phiLength, window.thetaStart, window.thetaLength);
+      document.body.appendChild(renderer.domElement);
+      // var geometryTest = new THREE.SphereGeometry(1, 50, 50, 20, 20, 5, 2);
+      const sunShape = new THREE.SphereGeometry(.9, 20, 20, 100, 10, 10, 8);
+      const materialTest = new THREE.LineDashedMaterial({
+        color: 0xFFFF00
+      });
+      const sun = new THREE.Line(sunShape, materialTest);
+      scene.add(sun);
+      objects.push(sun);
+
+      // EARTH
+      const earthShape = new THREE.SphereGeometry(.10, 40, 10, 100, 10, 10, 8);
+      const earthMaterial = new THREE.LineDashedMaterial({
+        color: 0x2233FF
+        // emissive: 0x112244
+      });
+      const earth = new THREE.Mesh(earthShape, earthMaterial);
+      earth.position.x = 2;
+      sun.add(earth);
+      objects.push(earth);
+
+      // MOON
+      const moonShape = new THREE.SphereGeometry(.05, 15, 5, 50, 10, 10, 5);
+      const moonMaterial = new THREE.LineDashedMaterial({
+        color: 0xff0000
+        // emissive: 0x112244
+      });
+      const moon = new THREE.Mesh(moonShape, moonMaterial);
+      moon.position.x = .3;
+      earth.add(moon);
+      objects.push(moon);
+
+      // MOON1
+      const moonShape1 = new THREE.SphereGeometry(.05, 15, 5, 50, 10, 10, 5);
+      const moonMaterial1 = new THREE.LineDashedMaterial({
+        color: 0xffff00
+        // emissive: 0x112244
+      });
+      const moon1 = new THREE.Mesh(moonShape1, moonMaterial1);
+      moon1.position.y = .3;
+      earth.add(moon1);
+      objects.push(moon1);
+
+      // // MOON2
+      // const moonShape2 = new THREE.SphereGeometry(.05, 15, 5, 50, 10, 10, 5);
+      // const moonMaterial2 = new THREE.LineDashedMaterial({
+      //   color: 0xff0000
+      //   // emissive: 0x112244
+      // });
+      // const moon2 = new THREE.Mesh(moonShape2, moonMaterial2);
+      // moon2.position.x = .7;
+      // earth.add(moon2);
+      // objects.push(moon2);
+      //
+      // // MOON3
+      // const moonShape3 = new THREE.SphereGeometry(.05, 15, 5, 50, 10, 10, 5);
+      // const moonMaterial3 = new THREE.LineDashedMaterial({
+      //   color: 0xff0000
+      //   // emissive: 0x112244
+      // });
+      // const moon3 = new THREE.Mesh(moonShape3, moonMaterial3);
+      // moon3.position.x = .9;
+      // earth.add(moon3);
+      // objects.push(moon3);
+      //
+      // // MOON8
+      // const moonShape8 = new THREE.SphereGeometry(.05, 15, 5, 50, 10, 10, 5);
+      // const moonMaterial8 = new THREE.LineDashedMaterial({
+      //   color: 0xff0000
+      //   // emissive: 0x112244
+      // });
+      // const moon8 = new THREE.Mesh(moonShape8, moonMaterial8);
+      // moon8.position.x = -.3;
+      // earth.add(moon8);
+      // objects.push(moon8);
+      //
+      // // MOON4
+      // const moonShape4 = new THREE.SphereGeometry(.05, 15, 5, 50, 10, 10, 5);
+      // const moonMaterial4 = new THREE.LineDashedMaterial({
+      //   color: 0xff0000
+      //   // emissive: 0x112244
+      // });
+      // const moon4 = new THREE.Mesh(moonShape4, moonMaterial4);
+      // moon4.position.x = -.5;
+      // earth.add(moon4);
+      // objects.push(moon4);
+      //
+      //
+      // // MOON6
+      // const moonShape6 = new THREE.SphereGeometry(.05, 15, 5, 50, 10, 10, 5);
+      // const moonMaterial6 = new THREE.LineDashedMaterial({
+      //   color: 0xff0000
+      //   // emissive: 0x112244
+      // });
+      // const moon6 = new THREE.Mesh(moonShape6, moonMaterial6);
+      // moon6.position.x = -.7;
+      // earth.add(moon6);
+      // objects.push(moon6);
+      //
+      // // MOON7
+      // const moonShape7 = new THREE.SphereGeometry(.05, 15, 5, 50, 10, 10, 5);
+      // const moonMaterial7 = new THREE.LineDashedMaterial({
+      //   color: 0xff0000
+      //   // emissive: 0x112244
+      // });
+      // const moon7 = new THREE.Mesh(moonShape7, moonMaterial7);
+      // moon7.position.x = -.9;
+      // earth.add(moon7);
+      // objects.push(moon7);
+
+      function resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+          renderer.setSize(width, height, false);
+        }
+        return needResize;
+      }
+
+      function render(time) {
+        time *= 0.001;
+
+        if (resizeRendererToDisplaySize(renderer)) {
+          const canvas = renderer.domElement;
+          camera.aspect = canvas.clientWidth / canvas.clientHeight;
+          camera.updateProjectionMatrix();
+        }
+
+        objects.forEach((obj) => {
+          obj.rotation.y = time;
+        });
+
+        objects.forEach((obj) => {
+          obj.rotation.x = time;
+        });
+
+        renderer.render(scene, camera);
+
+        requestAnimationFrame(render);
+      }
+
+      requestAnimationFrame(render);
+
+    }
+    main();
+  </script>
+</body>
+
+</html>

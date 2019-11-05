@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>My first three.js app</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="c"></canvas>
+  <script src="js/three.js"></script>
+  <script>
+    function main() {
+      const canvas = document.querySelector('#c');
+      const renderer = new THREE.WebGLRenderer({
+        canvas
+      });
+      // Our Javascript will go here.
+
+      // SET THE CAMERA POSITION
+      const fov = 40;
+      const aspect = 2; // the canvas default
+      const near = 0.1;
+      const far = 1000;
+      const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+      camera.position.set(0, 500, 0);
+      camera.up.set(0, 0, 1);
+      camera.lookAt(0, 1, 0);
+
+      const scene = new THREE.Scene();
+      //
+      // {
+      //   const color = 0xFFFFFF;
+      //   const intensity = 3;
+      //   const light = new THREE.PointLight(color, intensity);
+      //   scene.add(light);
+      // }
+      var counter = 0;
+      const objects = [];
+
+      // use just one sphere for everything
+      const radius = 1;
+      const widthSegments = 10;
+      const heightSegments = 10;
+
+      for (var i = 0; i < 150; i++) {
+        // Sphere
+        var sphereGeometry = new THREE.SphereBufferGeometry(
+          radius, widthSegments, heightSegments);
+
+        var sphereMaterial = new THREE.MeshPhongMaterial({
+          emissive: 0x49317B
+        });
+        var sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+        sphereMesh.scale.set(1, 1, 1); // make the sun large
+        sphereMesh.position.x = Math.random() * 300;
+        sphereMesh.position.y = Math.random() * 300;
+        sphereMesh.position.z = Math.random() * 150;
+        scene.add(sphereMesh);
+        objects.push(sphereMesh);
+
+        var sphereMesh1 = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+        sphereMesh1.scale.set(1, 1, 1); // make the sun large
+        sphereMesh1.position.x = Math.random() * -300;
+        sphereMesh1.position.y = Math.random() * 300;
+        sphereMesh1.position.z = Math.random() * 150;
+        scene.add(sphereMesh1);
+        objects.push(sphereMesh1);
+
+        // Pink
+        var sphereGeometryPink = new THREE.SphereBufferGeometry(
+          radius, widthSegments, heightSegments);
+
+        var sphereMaterialPink = new THREE.MeshPhongMaterial({
+          emissive: 0xff00ff
+        });
+
+        var sphereMeshPink1 = new THREE.Mesh(sphereGeometryPink, sphereMaterialPink);
+
+        sphereMeshPink1.scale.set(1, 1, 1); // make the sun large
+        sphereMeshPink1.position.x = Math.random() * 250;
+        sphereMeshPink1.position.y = Math.random() * 350;
+        sphereMeshPink1.position.z = Math.random() * 300;
+        scene.add(sphereMeshPink1);
+        objects.push(sphereMeshPink1);
+
+        var sphereMeshPink = new THREE.Mesh(sphereGeometryPink, sphereMaterialPink);
+
+        sphereMeshPink.scale.set(1, 1, 1); // make the sun large
+        sphereMeshPink.position.x = Math.random() * -250;
+        sphereMeshPink.position.y = Math.random() * 350;
+        sphereMeshPink.position.z = Math.random() * 300;
+        scene.add(sphereMeshPink);
+        objects.push(sphereMeshPink);
+
+        // Green
+        var sphereGeometryPink = new THREE.SphereBufferGeometry(
+          radius, widthSegments, heightSegments);
+
+        var sphereMaterialPink = new THREE.MeshPhongMaterial({
+          emissive: 0x00ff00
+        });
+
+        var sphereMeshGreen = new THREE.Mesh(sphereGeometryPink, sphereMaterialPink);
+
+        sphereMeshGreen.scale.set(1, 1, 1); // make the sun large
+        sphereMeshGreen.position.x = Math.random() * 180;
+        sphereMeshGreen.position.y = Math.random() * 350;
+        sphereMeshGreen.position.z = Math.random() * 300;
+        scene.add(sphereMeshGreen);
+        objects.push(sphereMeshGreen);
+
+        var sphereMeshGreen1 = new THREE.Mesh(sphereGeometryPink, sphereMaterialPink);
+
+        sphereMeshGreen1.scale.set(1, 1, 1); // make the sun large
+        sphereMeshGreen1.position.x = Math.random() * -180;
+        sphereMeshGreen1.position.y = Math.random() * 350;
+        sphereMeshGreen1.position.z = Math.random() * 300;
+        scene.add(sphereMeshGreen1);
+        objects.push(sphereMeshGreen1);
+
+        // White
+        var sphereGeometryWhite = new THREE.SphereBufferGeometry(
+          radius, widthSegments, heightSegments);
+
+        var sphereMaterialWhite = new THREE.MeshPhongMaterial({
+          emissive: 0xffffff
+        });
+
+        var sphereMeshWhite = new THREE.Mesh(sphereGeometryWhite, sphereMaterialWhite);
+
+        sphereMeshWhite.scale.set(1, 1, 1); // make the sun large
+        sphereMeshWhite.position.x = Math.random() * 120;
+        sphereMeshWhite.position.y = Math.random() * 350;
+        sphereMeshWhite.position.z = Math.random() * 150;
+        scene.add(sphereMeshWhite);
+        objects.push(sphereMeshWhite);
+
+        var sphereMeshWhite1 = new THREE.Mesh(sphereGeometryWhite, sphereMaterialWhite);
+
+        sphereMeshWhite1.scale.set(1, 1, 1); // make the sun large
+        sphereMeshWhite1.position.x = Math.random() * -120;
+        sphereMeshWhite1.position.y = Math.random() * 350;
+        sphereMeshWhite1.position.z = Math.random() * 150;
+        scene.add(sphereMeshWhite1);
+        objects.push(sphereMeshWhite1);
+
+      }
+
+
+      // // Ball 1
+      // const sphereGeometry1 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial1 = new THREE.MeshPhongMaterial({
+      //   emissive: 0xff00ff
+      // });
+      // const sunMesh1 = new THREE.Mesh(sphereGeometry1, sunMaterial1);
+      // sunMesh1.scale.set(3, 3, 3); // make the sun large
+      // sunMesh1.position.x = -40;
+      // sunMesh1.position.z = 10;
+      // scene.add(sunMesh1);
+      // objects.push(sunMesh1);
+      //
+      // // Ball 2
+      // const sphereGeometry2 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial2 = new THREE.MeshPhongMaterial({
+      //   emissive: 0x49317B
+      // });
+      // const sunMesh2 = new THREE.Mesh(sphereGeometry2, sunMaterial2);
+      // sunMesh2.scale.set(3, 3, 3); // make the sun large
+      // sunMesh2.position.x = 10;
+      // sunMesh2.position.z = -20;
+      // scene.add(sunMesh2);
+      // objects.push(sunMesh2);
+      //
+      // // Ball 3
+      // const sphereGeometry3 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial3 = new THREE.MeshPhongMaterial({
+      //   emissive: 0x49C5B6
+      // });
+      // const sunMesh3 = new THREE.Mesh(sphereGeometry3, sunMaterial3);
+      // sunMesh3.scale.set(3, 3, 3); // make the sun large
+      // sunMesh3.position.x = 10;
+      // sunMesh3.position.z = 20;
+      // scene.add(sunMesh3);
+      // objects.push(sunMesh3);
+      //
+      // // Ball 4
+      // const sphereGeometry4 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial4 = new THREE.MeshPhongMaterial({
+      //   emissive: 0x49317B
+      // });
+      // const sunMesh4 = new THREE.Mesh(sphereGeometry4, sunMaterial4);
+      // sunMesh4.scale.set(3, 3, 3); // make the sun large
+      // sunMesh4.position.x = 50;
+      // scene.add(sunMesh4);
+      // objects.push(sunMesh4);
+      //
+      // //
+      // // Ball 5
+      // const sphereGeometry5 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial5 = new THREE.MeshPhongMaterial({
+      //   emissive: 0x49C5B6
+      // });
+      // const sunMesh5 = new THREE.Mesh(sphereGeometry5, sunMaterial5);
+      // sunMesh5.scale.set(3, 3, 3); // make the sun large
+      // sunMesh5.position.x = -40;
+      // sunMesh5.position.z = -10;
+      // scene.add(sunMesh5);
+      // objects.push(sunMesh5);
+      //
+      // // Ball 7
+      // const sphereGeometry7 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial7 = new THREE.MeshPhongMaterial({
+      //   emissive: 0x49317B
+      // });
+      // const sunMesh7 = new THREE.Mesh(sphereGeometry7, sunMaterial7);
+      // sunMesh7.scale.set(3, 3, 3); // make the sun large
+      // sunMesh7.position.x = 30;
+      // scene.add(sunMesh7);
+      // objects.push(sunMesh7);
+      //
+      // // Ball 8
+      // const sphereGeometry8 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial8 = new THREE.MeshPhongMaterial({
+      //   emissive: 0x49C5B6
+      // });
+      // const sunMesh8 = new THREE.Mesh(sphereGeometry8, sunMaterial8);
+      // sunMesh8.scale.set(3, 3, 3); // make the sun large
+      // sunMesh8.position.x = 30;
+      // sunMesh8.position.z = 20;
+      // scene.add(sunMesh8);
+      // objects.push(sunMesh8);
+      //
+      // // Ball 9
+      // const sphereGeometry9 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial9 = new THREE.MeshPhongMaterial({
+      //   emissive: 0x49317B
+      // });
+      // const sunMesh9 = new THREE.Mesh(sphereGeometry9, sunMaterial9);
+      // sunMesh9.scale.set(3, 3, 3); // make the sun large
+      // sunMesh9.position.x = 10;
+      // scene.add(sunMesh9);
+      // objects.push(sunMesh9);
+      //
+      // //
+      // // Ball 10
+      // const sphereGeometry10 = new THREE.SphereBufferGeometry(
+      //   radius, widthSegments, heightSegments);
+      //
+      // const sunMaterial10 = new THREE.MeshPhongMaterial({
+      //   emissive: 0x49C5B6
+      // });
+      // const sunMesh10 = new THREE.Mesh(sphereGeometry10, sunMaterial10);
+      // sunMesh10.scale.set(3, 3, 3); // make the sun large
+      // sunMesh10.position.x = 50;
+      // sunMesh10.position.z = 20;
+      // scene.add(sunMesh10);
+      // objects.push(sunMesh10);
+
+
+      function resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+          renderer.setSize(width, height, false);
+        }
+        return needResize;
+      }
+
+      function render(time) {
+        time *= 1;
+
+        if (resizeRendererToDisplaySize(renderer)) {
+          const canvas = renderer.domElement;
+          camera.aspect = canvas.clientWidth / canvas.clientHeight;
+          camera.updateProjectionMatrix();
+        }
+
+        if (counter <= 100) { //Note the <=
+          objects.forEach((obj) => {
+            obj.position.z -= 1;
+            // obj.delay.position.z += 1;
+          });
+          counter++;
+        }
+
+        if (counter > 100) {
+          objects.forEach((obj) => {
+            obj.position.z += 1;
+            // obj.delay.position.z += 1;
+          });
+          counter++;
+        }
+        if (counter > 200) {
+          counter = 0;
+        }
+        renderer.render(scene, camera);
+
+        requestAnimationFrame(render);
+      }
+
+
+
+      requestAnimationFrame(render);
+
+    }
+    main();
+  </script>
+</body>
+
+</html>
